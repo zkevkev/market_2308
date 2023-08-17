@@ -183,8 +183,28 @@ Use TDD to update your `Market` class to include the following methods:
 | Method Name | Return Value |
 | ----------- | ------------ |
 | #sorted_item_list | An array of the <u>names</u> of all items the Vendors have in stock, sorted alphabetically. This list should not include any duplicate items. |
-| #total_inventory | Reports the quantities of all items sold at the market. Specifically, it should return a hash with items as keys and hashes as values - this sub-hash should have two key/value pairs: quantity pointing to total inventory for that item and vendors pointing to an array of the vendors that sell that item. |
+| #total_inventory | Reports the quantities of all items being sold at the market. Specifically, it should return a hash with items as keys and hashes as values - this sub-hash should have two key/value pairs: quantity pointing to total inventory for that item and vendors pointing to an array of vendors that sell that item. (See example below) |
 | #overstocked_items | An array of `Item` objects that are overstocked. An item is overstocked if it is sold by more than 1 vendor AND the total quantity is greater than 50. |
+
+```ruby
+# market.total_inventory
+
+#=> {
+#     <Item 1> => {
+#       quantity: <n>,
+#       vendors: [<Vendor 1>, <Vendor 2>]
+#     },
+#     <Item 2> => {
+#       quantity: <n>,
+#       vendors: [<Vendor 1>]
+#     },
+#     <Item 3> => {
+#       quantity: <n>,
+#       vendors: [<Vendor 3>]
+#     },
+#     ...
+#   }
+```
 
 ## Iteration 4 - Selling Items
 
@@ -204,12 +224,12 @@ Use TDD to update your `Market` class to include the following methods:
 
 You will need to add `require "date"` to the top of your `Market` class.
 
-A market will now be created with a date - whatever date the market is created on through the use of `Date.today`. The addition of a date to the market should NOT break any previous tests.  The `date` method will return a string representation of the date - 'dd/mm/yyyy'. We want you to test this with a date that is IN THE PAST. In order to test the date method in a way that will work today, tomorrow and on any date in the future, you will need to use a [stub](https://backend.turing.edu/module1/lessons/mocks_stubs#:~:text=full%20Paint%20objects.-,Stubs,-In%20our%20next) 🙂
+A market will now be created with a date - whatever date the market is created on through the use of `Date.today`. The addition of a date to the market should NOT break any previous tests.  The `date` method will return a string representation of the date - 'dd/mm/yyyy'. We want you to test this with a date that is IN THE PAST. In order to test the date method in a way that will work today, tomorrow, and on any date in the future, you will need to use a [stub](https://backend.turing.edu/module1/lessons/mocks_stubs#:~:text=full%20Paint%20objects.-,Stubs,-In%20our%20next) 🙂
 
 **#sell**
 
 1. If the Market does not have enough of the item in stock to satisfy the given quantity, this method should return `false`.
 
-2. If the Market's has enough of the item in stock to satisfy the given quantity, this method should return `true`. Additionally, this method should reduce the stock of the Vendors. It should look through the Vendors in the order they were added and sell the item from the first Vendor with that item in stock. If that Vendor does not have enough stock to satisfy the given quantity, the Vendor's entire stock of that item will be depleted, and the remaining quantity will be sold from the next vendor with that item in stock. It will follow this pattern until the entire quantity requested has been sold.
+2. If the Market has enough of the item in stock to satisfy the given quantity, this method should return `true`. Additionally, this method should reduce the stock of the Vendors. It should look through the Vendors in the order they were added and sell the item from the first Vendor with that item in stock. If that Vendor does not have enough stock to satisfy the given quantity, the Vendor's entire stock of that item will be depleted, and the remaining quantity will be sold from the next vendor with that item in stock. It will follow this pattern until the entire quantity requested has been sold.
 
 For example, suppose vendor1 has 35 `peaches` and vendor3 has 65 `peaches`, and vendor1 was added to the market first. If the method `sell(<ItemXXX, @name = 'Peach'...>, 40)` is called, the method should return `true`, vendor1's new stock of `peaches` should be 0, and vendor3's new stock of `peaches` should be 60.
