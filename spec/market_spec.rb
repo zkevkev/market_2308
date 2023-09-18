@@ -81,4 +81,27 @@ RSpec.describe Item do
       expect(@market.overstocked_items).to eq([@item1, @item2, @item3])
     end
   end
+
+  describe '#date' do
+    it 'assigns a date to the market' do
+      # research stub methodology
+    end
+  end
+
+  describe '#sell' do
+    it 'if available, returns true and removes a given quantity of items from vendors' do
+      expect(@market.sell(@item1, 100)).to be true
+
+      @market.sell(@item2, 17)
+      expect(@market.vendors_that_sell(@item2)).to eq([])
+
+      @market.sell(@item1, 35)
+      expect(@vendor1.check_stock[@item1]).to eq(0)
+      expect(@vendor3.check_stock[@item1]).to eq(65)
+    end
+
+    it 'returns false if requested quantity of items is unavailable' do
+      expect(@market.sell(@item1, 101)).to be false
+    end
+  end
 end
