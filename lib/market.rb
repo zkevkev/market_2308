@@ -31,4 +31,16 @@ class Market
     end
     items.uniq.sort
   end
+
+  def total_inventory
+    item_list = {}
+    @vendors.each do |vendor|
+      vendor.inventory.each do |item, quantity|
+        item_list[item] ||= { quantity: 0, vendors: [] }
+        item_list[item][:quantity] += quantity
+        item_list[item][:vendors] << vendor
+      end
+    end
+    item_list
+  end
 end

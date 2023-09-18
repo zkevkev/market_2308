@@ -62,7 +62,7 @@ RSpec.describe Item do
 
   describe '#total_inventory' do
     it 'returns a hash of of all items being sold' do
-      expect(@market.total_inventory[@item2]).to eq({quantity: 7, vendors: [@vendor1]}) 
+      expect(@market.total_inventory[@item2]).to eq({quantity: 17, vendors: [@vendor1, @vendor2]}) 
       expect(@market.total_inventory[@item1]).to eq({quantity: 100, vendors: [@vendor1, @vendor3]}) 
     end
   end
