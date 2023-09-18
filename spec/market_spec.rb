@@ -68,19 +68,16 @@ RSpec.describe Item do
   end
 
   describe '#overstocked_items' do
-    xit 'returns an array of items that are sold by >1 vendor and have a quantity >50' do
+    it 'returns an array of items that are sold by >1 vendor and have a quantity >50' do
       expect(@market.overstocked_items).to eq([@item1])
 
       @vendor1.stock(@item2, 33)
-
       expect(@market.overstocked_items).to eq([@item1])
 
       @vendor1.stock(@item2, 1)
-
       expect(@market.overstocked_items).to eq([@item1, @item2])
 
       @vendor3.stock(@item3, 1)
-
       expect(@market.overstocked_items).to eq([@item1, @item2, @item3])
     end
   end
