@@ -55,4 +55,8 @@ class Market
     end
     overstocked_list
   end
+
+  def sell(item, quantity)
+    
+  end
 end
