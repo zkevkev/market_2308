@@ -183,24 +183,24 @@ Use TDD to update your `Market` class to include the following methods:
 | Method Name | Return Value |
 | ----------- | ------------ |
 | #sorted_item_list | An array of the <u>names</u> of all items the Vendors have in stock, sorted alphabetically. This list should not include any duplicate items. |
-| #total_inventory | Reports the quantities of all items being sold at the market. Specifically, it should return a hash with items as keys and hashes as values - this sub-hash should have two key/value pairs: quantity pointing to total inventory for that item and vendors pointing to an array of vendors that sell that item. (See example below) |
+| #total_inventory | Reports the quantities of all items being sold at the market. Specifically, it should return a hash with `Item` objects as keys and hashes as their values - this sub-hash should have two key/value pairs: `quantity` pointing to the total inventory for that item and `vendors` pointing to an array of vendors that sell that item [this should be an array or `Vendor` objects]. (See example below) |
 | #overstocked_items | An array of `Item` objects that are overstocked. An item is overstocked if it is sold by more than 1 vendor AND the total quantity is greater than 50. |
 
 ```ruby
 # market.total_inventory
 
 #=> {
-#     <Item 1> => {
+#     #<Item 1> => {
 #       quantity: <n>,
-#       vendors: [<Vendor 1>, <Vendor 2>]
+#       vendors: [#<Vendor 1>, #<Vendor 2>]
 #     },
-#     <Item 2> => {
+#     #<Item 2> => {
 #       quantity: <n>,
-#       vendors: [<Vendor 1>]
+#       vendors: [#<Vendor 1>]
 #     },
-#     <Item 3> => {
+#     #<Item 3> => {
 #       quantity: <n>,
-#       vendors: [<Vendor 3>]
+#       vendors: [#<Vendor 3>]
 #     },
 #     ...
 #   }
